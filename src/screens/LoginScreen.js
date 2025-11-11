@@ -12,7 +12,7 @@ export default function LoginScreen({ navigation }) {
     }
     // For now, just navigate to main app
     // Later we'll add real authentication
-    Alert.alert('Success', 'Login successful!');
+    navigation.navigate('Main');
   };
 
   return (
@@ -43,7 +43,7 @@ export default function LoginScreen({ navigation }) {
         
         <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
           <Text style={styles.linkText}>
-            Don't have an account? <Text style={styles.signUpLink}>SING UP</Text>
+            Don't have an account? <Text style={styles.signUpLink}>SIGN UP</Text>
           </Text>
         </TouchableOpacity>
       </View>
