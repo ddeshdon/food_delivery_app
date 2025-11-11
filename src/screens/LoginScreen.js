@@ -13,6 +13,7 @@ export default function LoginScreen({ navigation }) {
     // For now, just navigate to main app
     // Later we'll add real authentication
     navigation.navigate('Main');
+    Alert.alert('Success', 'Login successful!');
   };
 
   return (
