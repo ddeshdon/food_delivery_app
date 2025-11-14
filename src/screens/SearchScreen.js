@@ -13,12 +13,14 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import PlaceholderImage from '../components/PlaceholderImage';
 import { useOrder } from '../contexts/OrderContext';
+import { useLocation } from '../contexts/LocationContext';
 
 const SearchScreen = ({ navigation }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [allRestaurants, setAllRestaurants] = useState([]);
   const { hasActiveOrder } = useOrder();
+  const { getDistanceToRestaurant, calculateDeliveryTime } = useLocation();
 
   // All restaurants with their menu items for search - using exact data from our MenuScreen
   useEffect(() => {
@@ -28,11 +30,10 @@ const SearchScreen = ({ navigation }) => {
         name: 'NICO NICO - Café & Brunch Place',
         category: 'Breakfast',
         description: 'Cozy café serving delicious brunch and breakfast items with a modern twist.',
-        distance: '8 min, 2.1 kilometer',
-        image: 'nico_nico_logo.jpg',
+        image: 'nico_nico.jpg',
         menuItems: [
-          'Chicken Salmon Curry', 'SUPER Crab Salad', 'Stir Fried Crab Toast', 'Green Tea Salad', 'Spicy Lime Soup',
-          'ALFREDO Shrimp', 'Kiwi Sorbet', 'Grilled Cheese Wrap', 'Chicken Burger', 'Egg & Sausage Toast'
+          'Chicken Burger', 'Crab Cake Salad', 'Eggs & Chashu toast', 'Grilled Cheese Salad', 'Katsu Sando',
+          'Saba Tofu Salad', 'Smoked Salmon Curry', 'Spicy tuna Toast', 'Wasabi Crab Toast', 'YUDANE Bread'
         ]
       },
       {
@@ -40,8 +41,7 @@ const SearchScreen = ({ navigation }) => {
         name: 'Din Tai Fung',
         category: 'Breakfast',
         description: 'World-famous Taiwanese restaurant chain specializing in xiaolongbao and noodles.',
-        distance: '12 min, 3.2 kilometer',
-        image: 'din_tai_fung_logo.jpg',
+        image: 'din_tai_fung.jpg',
         menuItems: [
           'Seaweed & Beancurd Salad', 'Shrimp & Kurobuta Pork Dumplings', 'Shrimp & Kurobuta Pork Wonton Soup', 'Broccoli with Garlic', 'Black Pepper Beef Tenderloin',
           'Noodles with Sesame Sauce', 'Braised Beef Noodle Soup', 'Tofu Puff & Glass Noodle Soup', 'Shrimp Fried Rice', 'Red Bean Sticky Rice Wrap'
@@ -52,11 +52,10 @@ const SearchScreen = ({ navigation }) => {
         name: 'Tsuru Udon',
         category: 'Lunch',
         description: 'Authentic Japanese udon noodles and traditional Japanese dishes.',
-        distance: '6 min, 1.5 kilometer',
-        image: 'tsuru_udon_logo.jpg',
+        image: 'tsuru_udon.jpg',
         menuItems: [
           'Hiyashi Oroshi', 'Niku Bukkake', 'Yamakake', 'Mentai Cream', 'Carbonara Udon',
-          'Gyu Stamina Yaki', 'Gyudon', 'Salmon Don', 'Katudon', 'Gyu Jyaga'
+          'Gyu Stamina Yaki', 'Gyudon', 'Salmon Don', 'Batacon', 'Gyu Jyaga'
         ]
       },
       {
@@ -64,23 +63,10 @@ const SearchScreen = ({ navigation }) => {
         name: 'Hey Gusto',
         category: 'Lunch',
         description: 'Italian restaurant offering fresh pasta, pizza, and Mediterranean cuisine.',
-        distance: '10 min, 2.8 kilometer',
-        image: 'hey_gusto_logo.jpg',
+        image: 'hey_gusto.jpg',
         menuItems: [
           'Burrata Fresh Tomatoes', 'Burrata Italian Ham', 'Australian Striploin Steak', 'Spaghetti with bacon', 'Signature Truffle',
           'Pepperoni Classic', 'Seafood', 'Salmon Grill Steak', 'Tiramisu', 'Ice cream'
-        ]
-      },
-      {
-        id: 5,
-        name: 'Thong Smith',
-        category: 'Dinner',
-        description: 'Traditional Thai restaurant serving authentic local dishes with bold flavors.',
-        distance: '7 min, 2.3 kilometer',
-        image: 'thong_smith_logo.jpg',
-        menuItems: [
-          'Pad Thai', 'Green Curry Chicken', 'Tom Yum Soup', 'Mango Sticky Rice', 'Massaman Curry',
-          'Papaya Salad', 'Basil Pork Rice', 'Thai Fried Rice', 'Coconut Ice Cream', 'Thai Tea'
         ]
       },
       {
@@ -88,11 +74,10 @@ const SearchScreen = ({ navigation }) => {
         name: 'Khao Jaan-Prod',
         category: 'Dinner',
         description: 'Royal Thai cuisine restaurant offering traditional recipes and premium ingredients.',
-        distance: '15 min, 4.1 kilometer',
-        image: 'khao_jaan_logo.jpg',
+        image: 'khao_jaan_prod.jpg',
         menuItems: [
-          'Spicy Mixed Vegetable Curry with Chicken', 'Steamed Curried Fish', 'Shrimp Paste Chili Dip', 'Pad Thai with Shrimp', 'Grilled Shrimp',
-          'Thai Herb Baked Chicken', 'Thai Grilled Chicken', 'Pork Leg Curry with Cha-Muang Leaves', 'Black Pepper Fried Rice', 'Chinese Chives with Egg'
+          'Spicy Mixed Vegetable Curry', 'Steamed Curried Fish', 'Shrimp Paste Chili Dip', 'Pad Thai with Shrimp', 'Grilled Shrimp',
+          'Thai Herb Baked Chicken', 'Thai Grilled Chicken', 'Pork Leg Curry', 'Black Pepper Fried Rice', 'Chinese Chives with Egg'
         ]
       },
       {
@@ -100,11 +85,10 @@ const SearchScreen = ({ navigation }) => {
         name: 'Laem Charoen Seafood',
         category: 'Dinner',
         description: 'Famous Thai seafood restaurant chain known for authentic flavors and fresh seafood.',
-        distance: '20 min, 5.5 kilometer',
-        image: 'laem_charoen_logo.jpg',
+        image: 'laem_charoen_seafood.jpg',
         menuItems: [
-          'Fried Snow Fish with Fish Sauce', 'Grouper in Southern Thai Sour Curry', 'Steamed Curry Fish Custard', 'Green Curry with Fish Balls', 'Tod Man Pla',
-          'Stir-fried Crab with Black Pepper', 'Tiger Prawns Baked with Ginger and Scallion', 'White Shrimp Stir-fried with Chili and Sea Asparagus', 'Pla Neung Manao', 'Crab Curry'
+          'Fried Snow Fish', 'Grouper Curry', 'Steamed Curry Fish', 'Green Curry Fish Balls', 'Tod Man Pla',
+          'Crab Black Pepper', 'Tiger Prawns', 'White Shrimp Chili', 'Pla Neung Manao', 'Crab Curry'
         ]
       },
       {
@@ -112,8 +96,7 @@ const SearchScreen = ({ navigation }) => {
         name: 'Nose Tea',
         category: 'Beverage',
         description: 'Trendy tea house offering premium bubble tea and specialty drinks.',
-        distance: '5 min, 1.2 kilometer',
-        image: 'nose_tea_logo.jpg',
+        image: 'nose_tea.jpg',
         menuItems: [
           'Sassy Cactus', 'Grape Tea', 'Nose tea signature', 'Chocolate Signature', 'Thai Tea Signature',
           'OLYMPUS Taro', 'Mandarin Tea', 'Lemon Tea', 'Peachy Green Tea', 'Lychee Tea'
@@ -124,8 +107,7 @@ const SearchScreen = ({ navigation }) => {
         name: 'Boost Juice',
         category: 'Beverage',
         description: 'Fresh juice bar offering healthy smoothies, juices, and protein shakes.',
-        distance: '9 min, 2.4 kilometer',
-        image: 'boost_juice_logo.jpg',
+        image: 'boost_juice.jpg',
         menuItems: [
           'Mini Me Mango', 'Immunity Juice', 'Vita C Detox Juice', 'Blueberry Blast', 'King William Chocolate',
           'Raspberry Mango Crush', 'Strawberry Protein', 'Cookie and Cream', 'Banana Buzz', 'Superfruit Energy'
@@ -133,11 +115,10 @@ const SearchScreen = ({ navigation }) => {
       },
       {
         id: 10,
-        name: 'Yolo Thailand',
+        name: 'Yole Thailand',
         category: 'Dessert',
         description: 'Modern frozen yogurt shop with creative toppings and healthy options.',
-        distance: '14 min, 3.7 kilometer',
-        image: 'yolo_logo.jpg',
+        image: 'yole_thailand.jpg',
         menuItems: [
           'Peanut Butter', 'SIGNATURE CUPS', 'IBIZA', 'WAFFLE BOWL', 'CONES',
           'BUBBLE WAFFLE', 'YOLE BOX', 'SHAKES', 'TWIST', 'Pistachio'
@@ -148,8 +129,7 @@ const SearchScreen = ({ navigation }) => {
         name: 'Azabusabo Thailand',
         category: 'Dessert',
         description: 'Premium Japanese-style ice cream with authentic flavors and artisanal quality.',
-        distance: '18 min, 5.1 kilometer',
-        image: 'azabusabo_logo.jpg',
+        image: 'azabusabo_thailand.jpg',
         menuItems: [
           'Yuzu', 'Chocolate', 'Vanilla', 'Matcha', 'Mix flavor(yuzu&choco)',
           'Mix flavor(vanilla& matcha)', 'Monaka Ice cream', 'Single Cup', 'Double Cup', 'Double Cone'
@@ -235,6 +215,11 @@ const SearchScreen = ({ navigation }) => {
   };
 
   const renderSearchResult = ({ item }) => {
+    // Calculate real distance and time
+    const distance = getDistanceToRestaurant(item.type === 'restaurant' ? item.name : item.restaurantName);
+    const deliveryTime = calculateDeliveryTime(item.type === 'restaurant' ? item.name : item.restaurantName);
+    const distanceText = `${deliveryTime} min, ${distance.toFixed(1)} km`;
+    
     if (item.type === 'restaurant') {
       return (
         <TouchableOpacity 
@@ -242,7 +227,12 @@ const SearchScreen = ({ navigation }) => {
           onPress={() => handleRestaurantPress(item)}
         >
           <View style={styles.restaurantImageContainer}>
-            <PlaceholderImage imageName={item.image} style={styles.restaurantImage} />
+            <PlaceholderImage 
+              imageName={item.image} 
+              width={80}
+              height={80}
+              style={styles.restaurantImage} 
+            />
           </View>
           <View style={styles.restaurantInfo}>
             <Text style={styles.restaurantName}>{item.name}</Text>
@@ -251,7 +241,7 @@ const SearchScreen = ({ navigation }) => {
             </Text>
             <View style={styles.restaurantMeta}>
               <Ionicons name="location-outline" size={14} color="#666" />
-              <Text style={styles.restaurantDistance}>{item.distance}</Text>
+              <Text style={styles.restaurantDistance}>{distanceText}</Text>
               <View style={styles.ratingContainer}>
                 <Ionicons name="star" size={14} color="#FFD700" />
                 <Ionicons name="bookmark-outline" size={14} color="#666" style={styles.bookmarkIcon} />
@@ -261,24 +251,19 @@ const SearchScreen = ({ navigation }) => {
         </TouchableOpacity>
       );
     } else {
-      // Food item result
+      // Food item result - don't show image for food items in search
       return (
         <TouchableOpacity 
           style={styles.foodCard}
           onPress={() => handleRestaurantPress(item)}
         >
-          <View style={styles.foodImageContainer}>
-            <PlaceholderImage imageName={item.foodImage} style={styles.foodImage} />
-          </View>
           <View style={styles.foodInfo}>
             <Text style={styles.foodName}>{item.name}</Text>
             <Text style={styles.foodRestaurant}>from {item.restaurantName}</Text>
             <View style={styles.foodMeta}>
               <Ionicons name="restaurant-outline" size={14} color="#666" />
               <Text style={styles.foodCategory}>{item.category}</Text>
-              <View style={styles.ratingContainer}>
-                <Ionicons name="star" size={14} color="#FFD700" />
-              </View>
+              <Text style={styles.foodDistance}>{distanceText}</Text>
             </View>
           </View>
         </TouchableOpacity>
@@ -465,7 +450,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: '#fff',
     borderRadius: 12,
-    padding: 12,
+    padding: 16,
     marginVertical: 6,
     shadowColor: '#000',
     shadowOffset: {
@@ -478,17 +463,6 @@ const styles = StyleSheet.create({
     borderLeftWidth: 4,
     borderLeftColor: '#9C27B0',
   },
-  foodImageContainer: {
-    width: 60,
-    height: 60,
-    borderRadius: 8,
-    overflow: 'hidden',
-    marginRight: 12,
-  },
-  foodImage: {
-    width: '100%',
-    height: '100%',
-  },
   foodInfo: {
     flex: 1,
     justifyContent: 'space-between',
@@ -497,24 +471,28 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     color: '#333',
-    marginBottom: 2,
+    marginBottom: 4,
   },
   foodRestaurant: {
     fontSize: 13,
     color: '#9C27B0',
     fontWeight: '600',
-    marginBottom: 4,
+    marginBottom: 8,
   },
   foodMeta: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
   },
   foodCategory: {
     fontSize: 12,
     color: '#666',
     marginLeft: 4,
-    flex: 1,
+    marginRight: 8,
+  },
+  foodDistance: {
+    fontSize: 12,
+    color: '#666',
+    marginLeft: 'auto',
   },
 });
 

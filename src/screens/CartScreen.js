@@ -9,6 +9,7 @@ import {
   StatusBar,
   Alert,
   ScrollView,
+  TextInput,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import PlaceholderImage from '../components/PlaceholderImage';
@@ -21,7 +22,6 @@ const CartScreen = ({ navigation }) => {
   const { userLocation, calculateDeliveryTime, getDistanceToRestaurant } = useLocation();
   const { hasActiveOrder, createOrder } = useOrder();
   const [orderNote, setOrderNote] = useState('');
-  const [couponCode, setCouponCode] = useState('');
 
   const deliveryFee = 20;
   const foodTotal = getCartTotal();
@@ -40,12 +40,6 @@ const CartScreen = ({ navigation }) => {
         }
       ]
     );
-  };
-
-  const applyCoupon = () => {
-    if (couponCode.trim()) {
-      Alert.alert('Coupon', 'Coupon functionality will be implemented soon!');
-    }
   };
 
   const placeOrder = () => {
@@ -84,7 +78,8 @@ const CartScreen = ({ navigation }) => {
               totalAmount,
               deliveryTimeMinutes,
               userLocation,
-              deliveryAddress: userLocation.address
+              deliveryAddress: userLocation.address,
+              note: orderNote
             };
 
             const newOrder = createOrder(orderData);
@@ -95,7 +90,7 @@ const CartScreen = ({ navigation }) => {
               `Your order #${newOrder.id} has been confirmed!\n\nEstimated delivery: ${deliveryTimeMinutes} minutes\n\nYou can track your order progress in the app.`,
               [
                 { text: 'Track Order', onPress: () => navigation.navigate('OrderTracking') },
-                { text: 'OK', onPress: () => navigation.navigate('Home') }
+                { text: 'OK', onPress: () => navigation.navigate('Main') }
               ]
             );
           }
@@ -111,7 +106,11 @@ const CartScreen = ({ navigation }) => {
       </View>
       
       <View style={styles.itemImageContainer}>
-        <PlaceholderImage imageName={item.imageName} style={styles.itemImage} />
+        <PlaceholderImage 
+          imageName={item.imageName} 
+          restaurantName={item.restaurantName}
+          style={styles.itemImage} 
+        />
       </View>
       
       <View style={styles.itemInfo}>
@@ -194,7 +193,20 @@ const CartScreen = ({ navigation }) => {
         <View style={styles.orderSection}>
           <View style={styles.orderHeader}>
             <Text style={styles.sectionTitle}>Your Order:</Text>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => {
+              // Get the restaurant name from the first cart item
+              const restaurantName = cartItems[0]?.restaurantName;
+              if (restaurantName) {
+                // Determine category based on restaurant name
+                let category = 'Breakfast';
+                if (restaurantName === 'Tsuru Udon' || restaurantName === 'Hey Gusto') {
+                  category = 'Lunch';
+                } else if (restaurantName === 'Nose Tea') {
+                  category = 'Beverage';
+                }
+                navigation.navigate('Menu', { restaurantName, category });
+              }
+            }}>
               <Text style={styles.addMenuText}>Add menu</Text>
             </TouchableOpacity>
           </View>
@@ -226,19 +238,17 @@ const CartScreen = ({ navigation }) => {
 
         {/* Add Note */}
         <View style={styles.noteSection}>
-          <TouchableOpacity style={styles.addNoteButton}>
-            <Text style={styles.addNoteText}>Add Note</Text>
-          </TouchableOpacity>
-        </View>
-
-        {/* Coupon */}
-        <View style={styles.couponSection}>
-          <View style={styles.couponContainer}>
-            <Text style={styles.couponLabel}>Coupon</Text>
-            <TouchableOpacity onPress={applyCoupon}>
-              <Text style={styles.applyText}>Apply {'>'}</Text>
-            </TouchableOpacity>
-          </View>
+          <Text style={styles.noteSectionTitle}>Order Note (Optional)</Text>
+          <TextInput
+            style={styles.noteInput}
+            placeholder="Add special instructions for your order..."
+            value={orderNote}
+            onChangeText={setOrderNote}
+            multiline
+            numberOfLines={3}
+            textAlignVertical="top"
+            placeholderTextColor="#999"
+          />
         </View>
       </ScrollView>
 
@@ -430,37 +440,25 @@ const styles = StyleSheet.create({
   noteSection: {
     backgroundColor: '#fff',
     marginHorizontal: 16,
-    marginBottom: 8,
-    borderRadius: 12,
-  },
-  addNoteButton: {
-    padding: 16,
-    alignItems: 'center',
-  },
-  addNoteText: {
-    fontSize: 16,
-    color: '#ccc',
-  },
-  couponSection: {
-    backgroundColor: '#fff',
-    marginHorizontal: 16,
     marginBottom: 16,
+    padding: 16,
     borderRadius: 12,
   },
-  couponContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: 16,
-  },
-  couponLabel: {
-    fontSize: 16,
-    color: '#333',
-  },
-  applyText: {
+  noteSectionTitle: {
     fontSize: 14,
-    color: '#9C27B0',
     fontWeight: '600',
+    color: '#333',
+    marginBottom: 8,
+  },
+  noteInput: {
+    fontSize: 14,
+    color: '#333',
+    backgroundColor: '#f5f5f5',
+    borderRadius: 8,
+    padding: 12,
+    minHeight: 80,
+    borderWidth: 1,
+    borderColor: '#e0e0e0',
   },
   orderButtonContainer: {
     padding: 16,

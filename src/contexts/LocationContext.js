@@ -16,12 +16,11 @@ const RESTAURANT_LOCATIONS = {
   'Din Tai Fung': { lat: 13.7447, lng: 100.5597, address: 'CentralWorld, Bangkok' },
   'Tsuru Udon': { lat: 13.7563, lng: 100.5018, address: 'Silom, Bangkok' },
   'Hey Gusto': { lat: 13.7308, lng: 100.5418, address: 'Sathorn, Bangkok' },
-  'Thong Smith': { lat: 13.7650, lng: 100.5380, address: 'Phloenchit, Bangkok' },
   'Khao Jaan-Prod': { lat: 13.7278, lng: 100.524, address: 'Lumpini, Bangkok' },
   'Laem Charoen Seafood': { lat: 13.7462, lng: 100.5346, address: 'Chong Nonsi, Bangkok' },
   'Nose Tea': { lat: 13.7539, lng: 100.5014, address: 'Sala Daeng, Bangkok' },
   'Boost Juice': { lat: 13.7444, lng: 100.5603, address: 'Ratchadamri, Bangkok' },
-  'Yolo Thailand': { lat: 13.7367, lng: 100.5480, address: 'Ploenchit, Bangkok' },
+  'Yole Thailand': { lat: 13.7367, lng: 100.5480, address: 'Ploenchit, Bangkok' },
   'Azabusabo Thailand': { lat: 13.7307, lng: 100.5418, address: 'Sathorn Road, Bangkok' }
 };
 

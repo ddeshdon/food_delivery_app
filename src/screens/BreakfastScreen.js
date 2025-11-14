@@ -8,30 +8,27 @@ import {
   SafeAreaView,
   Alert 
 } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import PlaceholderImage from '../components/PlaceholderImage';
 import { useOrder } from '../contexts/OrderContext';
+import { useLocation } from '../contexts/LocationContext';
 
 const breakfastRestaurants = [
   {
     id: '1',
     name: 'NICO NICO - Café & Brunch Place',
     imageName: 'nico_nico.jpg',
-    deliveryFee: '฿35',
-    distance: '1.3 km',
-    deliveryTime: '23min'
   },
   {
     id: '2',
     name: 'Din Tai Fung',
     imageName: 'din_tai_fung.jpg',
-    deliveryFee: '฿35',
-    distance: '1.5 km', 
-    deliveryTime: '25min'
   }
 ];
 
 export default function BreakfastScreen({ navigation }) {
   const { hasActiveOrder } = useOrder();
+  const { getDistanceToRestaurant, calculateDeliveryTime } = useLocation();
 
   const handleRestaurantPress = (restaurantName) => {
     if (hasActiveOrder()) {
@@ -52,36 +49,43 @@ export default function BreakfastScreen({ navigation }) {
     });
   };
 
-  const renderRestaurant = ({ item }) => (
-    <TouchableOpacity 
-      style={styles.restaurantCard}
-      onPress={() => handleRestaurantPress(item.name)}
-    >
-      <PlaceholderImage 
-        width={120} 
-        height={100} 
-        text={item.imageName}
-        style={styles.restaurantImage}
-      />
-      <View style={styles.restaurantInfo}>
-        <Text style={styles.restaurantName}>{item.name}</Text>
-        <View style={styles.restaurantDetails}>
-          <View style={styles.detailItem}>
-            <Text style={styles.detailIcon}>🚴</Text>
-            <Text style={styles.detailText}>{item.deliveryFee}</Text>
-          </View>
-          <View style={styles.detailItem}>
-            <Text style={styles.detailIcon}>📍</Text>
-            <Text style={styles.detailText}>{item.distance}</Text>
-          </View>
-          <View style={styles.detailItem}>
-            <Text style={styles.detailIcon}>⏱️</Text>
-            <Text style={styles.detailText}>{item.deliveryTime}</Text>
+  const renderRestaurant = (item) => {
+    const distance = getDistanceToRestaurant(item.name);
+    const deliveryTime = calculateDeliveryTime(item.name);
+    const deliveryFee = 20; // Fixed delivery fee
+    
+    return (
+      <TouchableOpacity 
+        key={item.id}
+        style={styles.restaurantCard}
+        onPress={() => handleRestaurantPress(item.name)}
+      >
+        <PlaceholderImage 
+          width={120} 
+          height={100} 
+          text={item.imageName}
+          style={styles.restaurantImage}
+        />
+        <View style={styles.restaurantInfo}>
+          <Text style={styles.restaurantName}>{item.name}</Text>
+          <View style={styles.restaurantDetails}>
+            <View style={styles.detailItem}>
+              <Ionicons name="bicycle" size={16} color="#666" />
+              <Text style={styles.detailText}>฿{deliveryFee}</Text>
+            </View>
+            <View style={styles.detailItem}>
+              <Ionicons name="location" size={16} color="#666" />
+              <Text style={styles.detailText}>{distance.toFixed(1)} km</Text>
+            </View>
+            <View style={styles.detailItem}>
+              <Ionicons name="time" size={16} color="#666" />
+              <Text style={styles.detailText}>{deliveryTime} min</Text>
+            </View>
           </View>
         </View>
-      </View>
-    </TouchableOpacity>
-  );
+      </TouchableOpacity>
+    );
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -94,7 +98,7 @@ export default function BreakfastScreen({ navigation }) {
           <Text style={styles.backIcon}>{'<'}</Text>
         </TouchableOpacity>
         <View style={styles.headerContent}>
-          <Text style={styles.deliverText}>🏫 Deliver to : Thammasat University</Text>
+          <Text style={styles.deliverText}>Deliver to : Thammasat University</Text>
         </View>
       </View>
 
@@ -102,11 +106,7 @@ export default function BreakfastScreen({ navigation }) {
       <ScrollView style={styles.content}>
         <Text style={styles.pageTitle}>Breakfast</Text>
         
-        {breakfastRestaurants.map((restaurant) => (
-          <View key={restaurant.id}>
-            {renderRestaurant({ item: restaurant })}
-          </View>
-        ))}
+        {breakfastRestaurants.map((restaurant) => renderRestaurant(restaurant))}
       </ScrollView>
     </SafeAreaView>
   );
@@ -186,10 +186,7 @@ const styles = StyleSheet.create({
   detailItem: {
     flexDirection: 'row',
     alignItems: 'center',
-  },
-  detailIcon: {
-    fontSize: 14,
-    marginRight: 5,
+    gap: 5,
   },
   detailText: {
     fontSize: 12,

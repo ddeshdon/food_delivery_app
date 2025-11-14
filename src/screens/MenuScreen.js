@@ -10,6 +10,7 @@ import {
   Modal,
   Alert
 } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import PlaceholderImage from '../components/PlaceholderImage';
 import { useCart } from '../contexts/CartContext';
 import { useOrder } from '../contexts/OrderContext';
@@ -17,16 +18,16 @@ import { useLocation } from '../contexts/LocationContext';
 
 const restaurantMenus = {
   'NICO NICO - Café & Brunch Place': [
-    { id: '1', name: 'Chicken Salmon Curry', price: 120, imageName: 'chicken_salmon_curry.jpg', rating: 4.5 },
-    { id: '2', name: 'SUPER Crab Salad', price: 150, imageName: 'crab_salad.jpg', rating: 4.7 },
-    { id: '3', name: 'Stir Fried Crab Toast', price: 135, imageName: 'crab_toast.jpg', rating: 4.6 },
-    { id: '4', name: 'Green Tea Salad', price: 95, imageName: 'green_tea_salad.jpg', rating: 4.3 },
-    { id: '5', name: 'Spicy Lime Soup', price: 85, imageName: 'spicy_lime_soup.jpg', rating: 4.4 },
-    { id: '6', name: 'ALFREDO Shrimp', price: 180, imageName: 'alfredo_shrimp.jpg', rating: 4.8 },
-    { id: '7', name: 'Kiwi Sorbet', price: 65, imageName: 'kiwi_sorbet.jpg', rating: 4.2 },
-    { id: '8', name: 'Grilled Cheese Wrap', price: 110, imageName: 'grilled_cheese_wrap.jpg', rating: 4.5 },
-    { id: '9', name: 'Chicken Burger', price: 125, imageName: 'chicken_burger.jpg', rating: 4.6 },
-    { id: '10', name: 'Egg & Sausage Toast', price: 95, imageName: 'egg_sausage_toast.jpg', rating: 4.3 }
+    { id: '1', name: 'Chicken Burger', price: 120, imageName: 'chicken_burger.jpg', rating: 4.5 },
+    { id: '2', name: 'Crab Cake Salad', price: 150, imageName: 'crab_cake_salad.jpg', rating: 4.7 },
+    { id: '3', name: 'Eggs & Chashu toast', price: 135, imageName: 'eggs_chashu_toast.jpg', rating: 4.6 },
+    { id: '4', name: 'Grilled Cheese Salad', price: 95, imageName: 'grilled_cheese_salad.jpg', rating: 4.3 },
+    { id: '5', name: 'Katsu Sando', price: 85, imageName: 'katsu_sando.jpg', rating: 4.4 },
+    { id: '6', name: 'Saba Tofu Salad', price: 180, imageName: 'saba_tofu_salad.jpg', rating: 4.8 },
+    { id: '7', name: 'Smoked Salmon Curry', price: 65, imageName: 'smoked_salmon_curry.jpg', rating: 4.2 },
+    { id: '8', name: 'Spicy tuna Toast', price: 110, imageName: 'spicy_tuna_toast.jpg', rating: 4.5 },
+    { id: '9', name: 'Wasabi Crab Toast', price: 125, imageName: 'wasabi_crab_toast.jpg', rating: 4.6 },
+    { id: '10', name: 'YUDANE Bread', price: 95, imageName: 'yudane_bread.jpg', rating: 4.3 }
   ],
   'Din Tai Fung': [
     { id: '11', name: 'Seaweed & Beancurd Salad', price: 120, imageName: 'seaweed_beancurd_salad.jpg', rating: 4.3 },
@@ -49,7 +50,7 @@ const restaurantMenus = {
     { id: '26', name: 'Gyu Stamina Yaki', price: 120, imageName: 'gyu_stamina_yaki.jpg', rating: 4.6 },
     { id: '27', name: 'Gyudon', price: 120, imageName: 'gyudon.jpg', rating: 4.5 },
     { id: '28', name: 'Salmon Don', price: 120, imageName: 'salmon_don.jpg', rating: 4.7 },
-    { id: '29', name: 'Katudon', price: 120, imageName: 'katudon.jpg', rating: 4.5 },
+    { id: '29', name: 'Batacon', price: 120, imageName: 'batacon.jpg', rating: 4.5 },
     { id: '30', name: 'Gyu Jyaga', price: 120, imageName: 'gyu_jyaga.jpg', rating: 4.4 }
   ],
   'Hey Gusto': [
@@ -63,18 +64,6 @@ const restaurantMenus = {
     { id: '38', name: 'Salmon Grill Steak', price: 120, imageName: 'salmon_grill_steak.jpg', rating: 4.6 },
     { id: '39', name: 'Tiramisu', price: 120, imageName: 'tiramisu.jpg', rating: 4.5 },
     { id: '40', name: 'Ice cream', price: 120, imageName: 'ice_cream.jpg', rating: 4.3 }
-  ],
-  'Thong Smith': [
-    { id: '41', name: 'Pad Thai', price: 120, imageName: 'pad_thai.jpg', rating: 4.6 },
-    { id: '42', name: 'Green Curry Chicken', price: 140, imageName: 'green_curry_chicken.jpg', rating: 4.7 },
-    { id: '43', name: 'Tom Yum Soup', price: 110, imageName: 'tom_yum_soup.jpg', rating: 4.5 },
-    { id: '44', name: 'Mango Sticky Rice', price: 80, imageName: 'mango_sticky_rice.jpg', rating: 4.8 },
-    { id: '45', name: 'Massaman Curry', price: 150, imageName: 'massaman_curry.jpg', rating: 4.6 },
-    { id: '46', name: 'Papaya Salad', price: 90, imageName: 'papaya_salad.jpg', rating: 4.4 },
-    { id: '47', name: 'Basil Pork Rice', price: 100, imageName: 'basil_pork_rice.jpg', rating: 4.5 },
-    { id: '48', name: 'Thai Fried Rice', price: 95, imageName: 'thai_fried_rice.jpg', rating: 4.3 },
-    { id: '49', name: 'Coconut Ice Cream', price: 70, imageName: 'coconut_ice_cream.jpg', rating: 4.4 },
-    { id: '50', name: 'Thai Tea', price: 60, imageName: 'thai_tea.jpg', rating: 4.5 }
   ],
   'Khao Jaan-Prod': [
     { id: '51', name: 'Spicy Mixed Vegetable Curry with Chicken', price: 120, imageName: 'spicy_mixed_vegetable_curry.jpg', rating: 4.5 },
@@ -124,7 +113,7 @@ const restaurantMenus = {
     { id: '89', name: 'Banana Buzz', price: 120, imageName: 'banana_buzz.jpg', rating: 4.5 },
     { id: '90', name: 'Superfruit Energy', price: 120, imageName: 'superfruit_energy.jpg', rating: 4.7 }
   ],
-  'Yolo Thailand': [
+  'Yole Thailand': [
     { id: '91', name: 'Peanut Butter', price: 120, imageName: 'peanut_butter.jpg', rating: 4.5 },
     { id: '92', name: 'SIGNATURE CUPS', price: 120, imageName: 'signature_cups.jpg', rating: 4.6 },
     { id: '93', name: 'IBIZA', price: 120, imageName: 'ibiza.jpg', rating: 4.5 },
@@ -206,13 +195,15 @@ export default function MenuScreen({ navigation, route }) {
         width="100%" 
         height={100} 
         text={item.imageName}
+        restaurantName={restaurantName}
         style={styles.menuItemImage}
       />
       <View style={styles.menuItemInfo}>
         <Text style={styles.menuItemName}>{item.name}</Text>
         <Text style={styles.menuItemPrice}>{item.price} Bath</Text>
         <View style={styles.ratingContainer}>
-          <Text style={styles.rating}>⭐ {item.rating}</Text>
+          <Ionicons name="star" size={12} color="#FFD700" />
+          <Text style={styles.rating}> {item.rating}</Text>
         </View>
         <TouchableOpacity 
           style={styles.addToCartButton}
@@ -239,11 +230,17 @@ export default function MenuScreen({ navigation, route }) {
 
       {/* Delivery Info */}
       <View style={styles.deliveryInfo}>
-        <Text style={styles.deliveryText}>🏫 Deliver to : Thammasat University</Text>
-        <Text style={styles.locationDetails}>
-          📍 Distance: {getDistanceToRestaurant(restaurantName).toFixed(1)} km • 
-          ⏱️ Est. delivery: {calculateDeliveryTime(restaurantName)} min
-        </Text>
+        <Text style={styles.deliveryText}>Deliver to : Thammasat University</Text>
+        <View style={styles.locationDetailsContainer}>
+          <Ionicons name="location" size={14} color="#666" />
+          <Text style={styles.locationDetails}>
+            Distance: {getDistanceToRestaurant(restaurantName).toFixed(1)} km
+          </Text>
+          <Ionicons name="time" size={14} color="#666" style={{ marginLeft: 10 }} />
+          <Text style={styles.locationDetails}>
+            Est. delivery: {calculateDeliveryTime(restaurantName)} min
+          </Text>
+        </View>
       </View>
 
       {/* Menu Grid */}
@@ -262,7 +259,7 @@ export default function MenuScreen({ navigation, route }) {
           style={styles.cartFloatingButton}
           onPress={() => navigation.navigate('Main', { screen: 'Cart' })}
         >
-          <Text style={styles.cartIcon}>🛒</Text>
+          <Ionicons name="cart" size={28} color="white" />
           <View style={styles.cartBadge}>
             <Text style={styles.cartBadgeText}>{getCartItemCount()}</Text>
           </View>
@@ -371,10 +368,15 @@ const styles = StyleSheet.create({
     color: '#333',
     fontWeight: '500',
   },
+  locationDetailsContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 5,
+  },
   locationDetails: {
     fontSize: 12,
     color: '#666',
-    marginTop: 2,
+    marginLeft: 5,
   },
   menuGrid: {
     padding: 15,
@@ -416,6 +418,8 @@ const styles = StyleSheet.create({
   ratingContainer: {
     marginBottom: 10,
     alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
   rating: {
     fontSize: 10,
@@ -448,10 +452,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 6,
     elevation: 8,
-  },
-  cartIcon: {
-    fontSize: 24,
-    color: 'white',
   },
   cartBadge: {
     position: 'absolute',

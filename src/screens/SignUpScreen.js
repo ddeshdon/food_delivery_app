@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, ActivityIndicator } from 'react-native';
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { auth } from '../config/firebaseConfig';
 
 export default function SignUpScreen({ navigation }) {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const handleSignUp = () => {
+  const handleSignUp = async () => {
     if (!username || !email || !password || !confirmPassword) {
       Alert.alert('Error', 'Please fill in all fields');
       return;
@@ -17,11 +20,47 @@ export default function SignUpScreen({ navigation }) {
       Alert.alert('Error', 'Passwords do not match');
       return;
     }
+
+    if (password.length < 6) {
+      Alert.alert('Error', 'Password must be at least 6 characters long');
+      return;
+    }
     
-    // For now, just show success and navigate to login
-    Alert.alert('Success', 'Account created successfully!', [
-      { text: 'OK', onPress: () => navigation.navigate('Login') }
-    ]);
+    setLoading(true);
+    
+    try {
+      // Create user with email and password
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      
+      // Update user profile with username
+      await updateProfile(userCredential.user, {
+        displayName: username
+      });
+      
+      setLoading(false);
+      Alert.alert('Success', 'Account created successfully!', [
+        { text: 'OK', onPress: () => navigation.navigate('Login') }
+      ]);
+    } catch (error) {
+      setLoading(false);
+      let errorMessage = 'Failed to create account';
+      
+      switch (error.code) {
+        case 'auth/email-already-in-use':
+          errorMessage = 'This email is already registered';
+          break;
+        case 'auth/invalid-email':
+          errorMessage = 'Invalid email address';
+          break;
+        case 'auth/weak-password':
+          errorMessage = 'Password is too weak';
+          break;
+        default:
+          errorMessage = error.message;
+      }
+      
+      Alert.alert('Error', errorMessage);
+    }
   };
 
   return (
@@ -64,8 +103,16 @@ export default function SignUpScreen({ navigation }) {
           secureTextEntry
         />
         
-        <TouchableOpacity style={styles.createButton} onPress={handleSignUp}>
-          <Text style={styles.createButtonText}>Create Account</Text>
+        <TouchableOpacity 
+          style={[styles.createButton, loading && styles.buttonDisabled]} 
+          onPress={handleSignUp}
+          disabled={loading}
+        >
+          {loading ? (
+            <ActivityIndicator color="white" />
+          ) : (
+            <Text style={styles.createButtonText}>Create Account</Text>
+          )}
         </TouchableOpacity>
         
         <TouchableOpacity onPress={() => navigation.navigate('Login')}>
@@ -134,5 +181,8 @@ const styles = StyleSheet.create({
   loginLink: {
     color: '#E74C3C',
     fontWeight: 'bold',
+  },
+  buttonDisabled: {
+    opacity: 0.6,
   },
 });

@@ -22,7 +22,10 @@ const OrderTrackingScreen = ({ navigation }) => {
 
   useEffect(() => {
     if (!activeOrder) {
-      navigation.navigate('Home');
+      // Check if navigation exists before navigating
+      if (navigation) {
+        navigation.navigate('Home');
+      }
       return;
     }
 
@@ -70,7 +73,7 @@ const OrderTrackingScreen = ({ navigation }) => {
           onPress: () => {
             cancelOrder();
             Alert.alert('Order Cancelled', 'Your order has been cancelled.', [
-              { text: 'OK', onPress: () => navigation.navigate('Main', { screen: 'Home' }) }
+              { text: 'OK', onPress: () => navigation?.navigate('Home') }
             ]);
           }
         }

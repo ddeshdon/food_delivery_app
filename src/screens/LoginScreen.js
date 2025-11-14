@@ -1,19 +1,55 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, ActivityIndicator } from 'react-native';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../config/firebaseConfig';
 
 export default function LoginScreen({ navigation }) {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const handleLogin = () => {
-    if (!username || !password) {
+  const handleLogin = async () => {
+    if (!email || !password) {
       Alert.alert('Error', 'Please fill in all fields');
       return;
     }
-    // For now, just navigate to main app
-    // Later we'll add real authentication
-    navigation.navigate('Main');
-    Alert.alert('Success', 'Login successful!');
+
+    setLoading(true);
+
+    try {
+      // Sign in with email and password
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      
+      setLoading(false);
+      // Navigate to main app
+      navigation.navigate('Main');
+      Alert.alert('Success', `Welcome back, ${userCredential.user.displayName || 'User'}!`);
+    } catch (error) {
+      setLoading(false);
+      let errorMessage = 'Failed to login';
+      
+      switch (error.code) {
+        case 'auth/user-not-found':
+          errorMessage = 'No account found with this email';
+          break;
+        case 'auth/wrong-password':
+          errorMessage = 'Incorrect password';
+          break;
+        case 'auth/invalid-email':
+          errorMessage = 'Invalid email address';
+          break;
+        case 'auth/user-disabled':
+          errorMessage = 'This account has been disabled';
+          break;
+        case 'auth/invalid-credential':
+          errorMessage = 'Invalid email or password';
+          break;
+        default:
+          errorMessage = error.message;
+      }
+      
+      Alert.alert('Error', errorMessage);
+    }
   };
 
   return (
@@ -21,12 +57,14 @@ export default function LoginScreen({ navigation }) {
       <Text style={styles.title}>LOGIN</Text>
       
       <View style={styles.formContainer}>
-        <Text style={styles.label}>User name :</Text>
+        <Text style={styles.label}>Email :</Text>
         <TextInput
           style={styles.input}
-          value={username}
-          onChangeText={setUsername}
+          value={email}
+          onChangeText={setEmail}
           placeholder=""
+          keyboardType="email-address"
+          autoCapitalize="none"
         />
         
         <Text style={styles.label}>Password :</Text>
@@ -38,8 +76,16 @@ export default function LoginScreen({ navigation }) {
           secureTextEntry
         />
         
-        <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
-          <Text style={styles.loginButtonText}>Login</Text>
+        <TouchableOpacity 
+          style={[styles.loginButton, loading && styles.buttonDisabled]} 
+          onPress={handleLogin}
+          disabled={loading}
+        >
+          {loading ? (
+            <ActivityIndicator color="white" />
+          ) : (
+            <Text style={styles.loginButtonText}>Login</Text>
+          )}
         </TouchableOpacity>
         
         <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
@@ -108,5 +154,8 @@ const styles = StyleSheet.create({
   signUpLink: {
     color: '#E74C3C',
     fontWeight: 'bold',
+  },
+  buttonDisabled: {
+    opacity: 0.6,
   },
 });

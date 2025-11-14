@@ -10,6 +10,7 @@ import {
   TextInput,
   Alert
 } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import PlaceholderImage from '../components/PlaceholderImage';
 import { useOrder } from '../contexts/OrderContext';
 import { useLocation } from '../contexts/LocationContext';
@@ -20,21 +21,6 @@ const categories = [
   { id: '3', name: 'Dinner', imageName: 'dinner.jpg' },
   { id: '4', name: 'Beverage', imageName: 'beverage.jpg' },
   { id: '5', name: 'Dessert', imageName: 'dessert.jpg' }
-];
-
-const promotions = [
-  {
-    id: '1',
-    title: '25% off*',
-    code: 'FINFIRST25',
-    description: 'Min150 Bath'
-  },
-  {
-    id: '2',
-    title: '50 Bath off*',
-    code: 'FINFIRST50',
-    description: 'Save 50B using this code'
-  }
 ];
 
 export default function HomeScreen({ navigation }) {
@@ -49,8 +35,7 @@ export default function HomeScreen({ navigation }) {
     { id: '2', name: 'Din Tai Fung', rating: 4.8, deliveryTime: '48 min', imageName: 'din_tai_fung.jpg' },
     { id: '3', name: 'Tsuru Udon', rating: 4.6, deliveryTime: '54 min', imageName: 'tsuru_udon.jpg' },
     { id: '4', name: 'Hey Gusto', rating: 4.4, deliveryTime: '35 min', imageName: 'hey_gusto.jpg' },
-    { id: '5', name: 'Thong Smith', rating: 4.7, deliveryTime: '28 min', imageName: 'thong_smith.jpg' },
-    { id: '6', name: 'Nose Tea', rating: 4.3, deliveryTime: '15 min', imageName: 'nose_tea.jpg' },
+    { id: '6', name: 'Nose Tea', rating: 4.3, deliveryTime: '15 min', imageName: 'nose_tea.png' },
   ];
 
   useEffect(() => {
@@ -91,27 +76,6 @@ export default function HomeScreen({ navigation }) {
     </TouchableOpacity>
   );
 
-  const renderPromotion = ({ item }) => (
-    <View style={styles.promotionCard}>
-      {/* Orange top section */}
-      <View style={styles.promotionTopSection}>
-        <View style={styles.promotionIcon}>
-          <Text style={styles.promotionIconText}>🎯</Text>
-        </View>
-        <Text style={styles.promotionTitle}>{item.title}</Text>
-        <Text style={styles.promotionCode}>{item.code}</Text>
-        <Text style={styles.promotionDescription}>{item.description}</Text>
-      </View>
-      
-      {/* White bottom section */}
-      <View style={styles.promotionBottomSection}>
-        <TouchableOpacity style={styles.applyCodeButton}>
-          <Text style={styles.applyCodeText}>Apply Code</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
-  );
-
   const handleRestaurantPress = (restaurantName) => {
     if (hasActiveOrder()) {
       Alert.alert(
@@ -133,7 +97,11 @@ export default function HomeScreen({ navigation }) {
       category = 'Dinner';
     } else if (restaurantName === 'Nose Tea') {
       category = 'Beverage';
-    }
+    } else if (restaurantName === 'Din Tai Fung') {
+      category = 'Dinner';
+    } else if (restaurantName === 'NICO NICO - Café & Brunch Place') {
+    category = 'Breakfast';
+  }
     
     navigation.navigate('Menu', { 
       restaurantName: restaurantName,
@@ -154,8 +122,14 @@ export default function HomeScreen({ navigation }) {
       />
       <View style={styles.restaurantInfo}>
         <Text style={styles.restaurantName}>{item.name}</Text>
-        <Text style={styles.restaurantRating}>⭐ {item.rating}</Text>
-        <Text style={styles.deliveryTime}>{item.deliveryTime}</Text>
+        <View style={styles.ratingContainer}>
+          <Ionicons name="star" size={14} color="#FFD700" />
+          <Text style={styles.restaurantRating}> {item.rating}</Text>
+        </View>
+        <View style={styles.deliveryTimeContainer}>
+          <Ionicons name="time" size={14} color="#666" />
+          <Text style={styles.deliveryTime}> {item.deliveryTime}</Text>
+        </View>
       </View>
     </TouchableOpacity>
   );
@@ -169,7 +143,7 @@ export default function HomeScreen({ navigation }) {
         
         {/* Location Display */}
         <View style={styles.locationContainer}>
-          <Text style={styles.locationLabel}>📍 Delivering to:</Text>
+          <Text style={styles.locationLabel}>Delivering to:</Text>
           <Text style={styles.locationText}>{userLocation.address}</Text>
         </View>
         
@@ -193,24 +167,6 @@ export default function HomeScreen({ navigation }) {
           numColumns={2}
           scrollEnabled={false}
           contentContainerStyle={styles.categoriesGrid}
-        />
-      </View>
-
-      {/* Promotions Section */}
-      <View style={styles.section}>
-        <View style={styles.sectionHeader}>
-          <Text style={styles.sectionTitle}>Promotion</Text>
-          <TouchableOpacity>
-            <Text style={styles.viewMore}>View more {'>>'}</Text>
-          </TouchableOpacity>
-        </View>
-        <FlatList
-          data={promotions}
-          renderItem={renderPromotion}
-          keyExtractor={(item) => item.id}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={styles.promotionsList}
         />
       </View>
 
@@ -331,69 +287,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#999',
   },
-  promotionsList: {
-    gap: 15,
-  },
-  promotionCard: {
-    borderRadius: 15,
-    width: 200,
-    marginRight: 10,
-    overflow: 'hidden',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
-  },
-  promotionTopSection: {
-    backgroundColor: '#FF6B35',
-    padding: 20,
-  },
-  promotionBottomSection: {
-    backgroundColor: 'white',
-    padding: 15,
-    alignItems: 'center',
-  },
-  promotionIcon: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: 'rgba(255,255,255,0.3)',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 10,
-  },
-  promotionIconText: {
-    fontSize: 20,
-  },
-  promotionTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: 'white',
-    marginBottom: 5,
-  },
-  promotionCode: {
-    fontSize: 12,
-    color: 'white',
-    opacity: 0.9,
-    marginBottom: 5,
-  },
-  promotionDescription: {
-    fontSize: 11,
-    color: 'white',
-    opacity: 0.8,
-    marginBottom: 15,
-  },
-  applyCodeButton: {
-    backgroundColor: 'transparent',
-    paddingVertical: 8,
-    paddingHorizontal: 15,
-  },
-  applyCodeText: {
-    color: '#000',
-    fontWeight: '600',
-    fontSize: 14,
-  },
   restaurantCard: {
     backgroundColor: 'white',
     borderRadius: 15,
@@ -423,10 +316,18 @@ const styles = StyleSheet.create({
     color: '#333',
     marginBottom: 5,
   },
+  ratingContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 3,
+  },
   restaurantRating: {
     fontSize: 14,
     color: '#666',
-    marginBottom: 3,
+  },
+  deliveryTimeContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   deliveryTime: {
     fontSize: 12,
