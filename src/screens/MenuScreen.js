@@ -20,133 +20,134 @@ const restaurantMenus = {
   'NICO NICO - Café & Brunch Place': [
     { id: '1', name: 'Chicken Burger', price: 189, imageName: 'chicken_burger.jpg', rating: 4.5 },
     { id: '2', name: 'Crab Cake Salad', price: 260, imageName: 'crab_cake_salad.jpg', rating: 4.7 },
-    { id: '3', name: 'Eggs & Chashu Toast', price: 165, imageName: 'eggs_chashu_toast.jpg', rating: 4.6 },
+    { id: '3', name: 'Eggs & Chashu toast', price: 165, imageName: 'eggs_chashu_toast.jpg', rating: 4.6 },
     { id: '4', name: 'Grilled Cheese Salad', price: 150, imageName: 'grilled_cheese_salad.jpg', rating: 4.3 },
     { id: '5', name: 'Katsu Sando', price: 180, imageName: 'katsu_sando.jpg', rating: 4.4 },
     { id: '6', name: 'Saba Tofu Salad', price: 240, imageName: 'saba_tofu_salad.jpg', rating: 4.8 },
     { id: '7', name: 'Smoked Salmon Curry', price: 220, imageName: 'smoked_salmon_curry.jpg', rating: 4.2 },
-    { id: '8', name: 'Spicy Tuna Toast', price: 170, imageName: 'spicy_tuna_toast.jpg', rating: 4.5 },
+    { id: '8', name: 'Spicy tuna Toast', price: 170, imageName: 'spicy_tuna_toast.jpg', rating: 4.5 },
     { id: '9', name: 'Wasabi Crab Toast', price: 185, imageName: 'wasabi_crab_toast.jpg', rating: 4.6 },
     { id: '10', name: 'YUDANE Bread', price: 120, imageName: 'yudane_bread.jpg', rating: 4.3 }
   ],
 
   'Din Tai Fung': [
-    { id: '11', name: 'Seaweed & Beancurd Salad', price: 145 },
-    { id: '12', name: 'Shrimp & Kurobuta Pork Dumplings', price: 230 },
-    { id: '13', name: 'Shrimp & Kurobuta Pork Wonton Soup', price: 220 },
-    { id: '14', name: 'Broccoli with Garlic', price: 150 },
-    { id: '15', name: 'Black Pepper Beef Tenderloin', price: 360 },
-    { id: '16', name: 'Noodles with Sesame Sauce', price: 160 },
-    { id: '17', name: 'Braised Beef Noodle Soup', price: 280 },
-    { id: '18', name: 'Tofu Puff & Glass Noodle Soup', price: 150 },
-    { id: '19', name: 'Shrimp Fried Rice', price: 220 },
-    { id: '20', name: 'Red Bean Sticky Rice Wrap', price: 120 }
+    { id: '11', name: 'Seaweed & Beancurd Salad', price: 145, imageName: 'seaweed_beancurd_salad.jpg', rating: 4.3 },
+    { id: '12', name: 'Shrimp & Kurobuta Pork Dumplings', price: 230, imageName: 'shrimp_pork_dumplings.jpg', rating: 4.6 },
+    { id: '13', name: 'Shrimp & Kurobuta Pork Wonton Soup', price: 220, imageName: 'shrimp_pork_wonton_soup.jpg', rating: 4.5 },
+    { id: '14', name: 'Broccoli with Garlic', price: 150, imageName: 'broccoli_garlic.jpg', rating: 4.3 },
+    { id: '15', name: 'Black Pepper Beef Tenderloin', price: 360, imageName: 'black_pepper_beef.jpg', rating: 4.5 },
+    { id: '16', name: 'Noodles with Sesame Sauce', price: 160, imageName: 'noodles_sesame_sauce.jpg', rating: 4.4 },
+    { id: '17', name: 'Braised Beef Noodle Soup', price: 280, imageName: 'braised_beef_noodle_soup.jpg', rating: 4.5 },
+    { id: '18', name: 'Tofu Puff & Glass Noodle Soup', price: 150, imageName: 'tofu_glass_noodle_soup.jpg', rating: 4.2 },
+    { id: '19', name: 'Shrimp Fried Rice', price: 220, imageName: 'shrimp_fried_rice.jpg', rating: 4.6 },
+    { id: '20', name: 'Red Bean Sticky Rice Wrap', price: 120, imageName: 'red_bean_sticky_rice.jpg', rating: 4.4 }
   ],
 
   'Tsuru Udon': [
-    { id: '21', name: 'Hiyashi Oroshi', price: 180 },
-    { id: '22', name: 'Niku Bukkake', price: 220 },
-    { id: '23', name: 'Yamakake', price: 190 },
-    { id: '24', name: 'Mentai Cream', price: 210 },
-    { id: '25', name: 'Carbonara Udon', price: 210 },
-    { id: '26', name: 'Gyu Stamina Yaki', price: 230 },
-    { id: '27', name: 'Gyudon', price: 195 },
-    { id: '28', name: 'Salmon Don', price: 240 },
-    { id: '29', name: 'Batacon', price: 180 },
-    { id: '30', name: 'Gyu Jyaga', price: 195 }
+    { id: '21', name: 'Hiyashi Oroshi', price: 180, imageName: 'hiyashi_oroshi.jpg', rating: 4.5 },
+    { id: '22', name: 'Niku Bukkake', price: 220, imageName: 'niku_bukkake.jpg', rating: 4.6 },
+    { id: '23', name: 'Yamakake', price: 190, imageName: 'yamakake.jpg', rating: 4.5 },
+    { id: '24', name: 'Mentai Cream', price: 210, imageName: 'mentai_cream.jpg', rating: 4.4 },
+    { id: '25', name: 'Carbonara Udon', price: 210, imageName: 'carbonara_udon.jpg', rating: 4.5 },
+    { id: '26', name: 'Gyu Stamina Yaki', price: 230, imageName: 'gyu_stamina_yaki.jpg', rating: 4.6 },
+    { id: '27', name: 'Gyudon', price: 195, imageName: 'gyudon.jpg', rating: 4.5 },
+    { id: '28', name: 'Salmon Don', price: 240, imageName: 'salmon_don.jpg', rating: 4.7 },
+    { id: '29', name: 'Batacon', price: 180, imageName: 'batacon.jpg', rating: 4.5 },
+    { id: '30', name: 'Gyu Jyaga', price: 195, imageName: 'gyu_jyaga.jpg', rating: 4.4 }
   ],
 
   'Hey Gusto': [
-    { id: '31', name: 'Burrata Fresh Tomatoes', price: 280 },
-    { id: '32', name: 'Burrata Italian Ham', price: 320 },
-    { id: '33', name: 'Australian Striploin Steak', price: 690 },
-    { id: '34', name: 'Spaghetti with Bacon', price: 180 },
-    { id: '35', name: 'Signature Truffle', price: 390 },
-    { id: '36', name: 'Pepperoni Classic', price: 260 },
-    { id: '37', name: 'Seafood', price: 320 },
-    { id: '38', name: 'Salmon Grill Steak', price: 420 },
-    { id: '39', name: 'Tiramisu', price: 180 },
-    { id: '40', name: 'Ice cream', price: 90 }
+    { id: '31', name: 'Burrata Fresh Tomatoes', price: 280, imageName: 'burrata_fresh_tomatoes.jpg', rating: 4.4 },
+    { id: '32', name: 'Burrata Italian Ham', price: 320, imageName: 'burrata_italian_ham.jpg', rating: 4.6 },
+    { id: '33', name: 'Australian Striploin Steak', price: 690, imageName: 'australian_striploin_steak.jpg', rating: 4.6 },
+    { id: '34', name: 'Spaghetti with bacon', price: 180, imageName: 'spaghetti_with_bacon.jpg', rating: 4.4 },
+    { id: '35', name: 'Signature Truffle', price: 390, imageName: 'signature_truffle.jpg', rating: 4.7 },
+    { id: '36', name: 'Pepperoni Classic', price: 260, imageName: 'pepperoni_classic.jpg', rating: 4.5 },
+    { id: '37', name: 'Seafood', price: 320, imageName: 'seafood.jpg', rating: 4.5 },
+    { id: '38', name: 'Salmon Grill Steak', price: 420, imageName: 'salmon_grill_steak.jpg', rating: 4.6 },
+    { id: '39', name: 'Tiramisu', price: 180, imageName: 'tiramisu.jpg', rating: 4.5 },
+    { id: '40', name: 'Ice cream', price: 90, imageName: 'ice_cream.jpg', rating: 4.3 }
   ],
 
   'Khao Jaan-Prod': [
-    { id: '51', name: 'Spicy Mixed Vegetable Curry with Chicken', price: 150 },
-    { id: '52', name: 'Steamed Curried Fish', price: 160 },
-    { id: '53', name: 'Shrimp Paste Chili Dip', price: 140 },
-    { id: '54', name: 'Pad Thai with Shrimp', price: 180 },
-    { id: '55', name: 'Grilled Shrimp', price: 260 },
-    { id: '56', name: 'Thai Herb Baked Chicken', price: 160 },
-    { id: '57', name: 'Thai Grilled Chicken', price: 140 },
-    { id: '58', name: 'Pork Leg Curry with Cha-Muang Leaves', price: 170 },
-    { id: '59', name: 'Black Pepper Fried Rice', price: 150 },
-    { id: '60', name: 'Chinese Chives with Egg', price: 120 }
+    { id: '51', name: 'Spicy Mixed Vegetable Curry with Chicken', price: 150, imageName: 'spicy_mixed_vegetable_curry.jpg', rating: 4.5 },
+    { id: '52', name: 'Steamed Curried Fish', price: 160, imageName: 'steamed_curried_fish.jpg', rating: 4.6 },
+    { id: '53', name: 'Shrimp Paste Chili Dip', price: 140, imageName: 'shrimp_paste_chili_dip.jpg', rating: 4.5 },
+    { id: '54', name: 'Pad Thai with Shrimp', price: 180, imageName: 'pad_thai_shrimp.jpg', rating: 4.4 },
+    { id: '55', name: 'Grilled Shrimp', price: 260, imageName: 'grilled_shrimp.jpg', rating: 4.6 },
+    { id: '56', name: 'Thai Herb Baked Chicken', price: 160, imageName: 'thai_herb_baked_chicken.jpg', rating: 4.5 },
+    { id: '57', name: 'Thai Grilled Chicken', price: 140, imageName: 'thai_grilled_chicken.jpg', rating: 4.5 },
+    { id: '58', name: 'Pork Leg Curry with Cha-Muang Leaves', price: 170, imageName: 'pork_leg_curry.jpg', rating: 4.4 },
+    { id: '59', name: 'Black Pepper Fried Rice', price: 150, imageName: 'black_pepper_fried_rice.jpg', rating: 4.6 },
+    { id: '60', name: 'Chinese Chives with Egg', price: 120, imageName: 'chinese_chives_egg.jpg', rating: 4.3 }
   ],
 
   'Laem Charoen Seafood': [
-    { id: '61', name: 'Fried Snow Fish with Fish Sauce', price: 420 },
-    { id: '62', name: 'Grouper in Southern Thai Sour Curry', price: 380 },
-    { id: '63', name: 'Steamed Curry Fish Custard', price: 180 },
-    { id: '64', name: 'Green Curry with Fish Balls', price: 220 },
-    { id: '65', name: 'Tod Man Pla', price: 180 },
-    { id: '66', name: 'Stir-fried Crab with Black Pepper', price: 550 },
-    { id: '67', name: 'Tiger Prawns Baked with Ginger and Scallion', price: 390 },
-    { id: '68', name: 'White Shrimp Stir-fried with Chili', price: 280 },
-    { id: '69', name: 'Pla Neung Manao', price: 420 },
-    { id: '70', name: 'Crab Curry', price: 480 }
+    { id: '61', name: 'Fried Snow Fish with Fish Sauce', price: 420, imageName: 'fried_snow_fish.jpg', rating: 4.5 },
+    { id: '62', name: 'Grouper in Southern Thai Sour Curry', price: 380, imageName: 'grouper_southern_curry.jpg', rating: 4.6 },
+    { id: '63', name: 'Steamed Curry Fish Custard', price: 180, imageName: 'steamed_curry_fish_custard.jpg', rating: 4.5 },
+    { id: '64', name: 'Green Curry with Fish Balls', price: 220, imageName: 'green_curry_fish_balls.jpg', rating: 4.4 },
+    { id: '65', name: 'Tod Man Pla', price: 180, imageName: 'tod_man_pla.jpg', rating: 4.5 },
+    { id: '66', name: 'Stir-fried Crab with Black Pepper', price: 550, imageName: 'stir_fried_crab_pepper.jpg', rating: 4.6 },
+    { id: '67', name: 'Tiger Prawns Baked with Ginger and Scallion', price: 390, imageName: 'tiger_prawns_ginger.jpg', rating: 4.3 },
+    { id: '68', name: 'White Shrimp Stir-fried with Chili and Sea Asparagus', price: 280, imageName: 'white_shrimp_chili.jpg', rating: 4.5 },
+    { id: '69', name: 'Pla Neung Manao', price: 420, imageName: 'pla_neung_manao.jpg', rating: 4.4 },
+    { id: '70', name: 'Crab Curry', price: 480, imageName: 'crab_curry.jpg', rating: 4.6 }
   ],
 
   'Nose Tea': [
-    { id: '71', name: 'Sassy Cactus', price: 85 },
-    { id: '72', name: 'Grape Tea', price: 90 },
-    { id: '73', name: 'Nose tea signature', price: 95 },
-    { id: '74', name: 'Chocolate Signature', price: 105 },
-    { id: '75', name: 'Thai Tea Signature', price: 90 },
-    { id: '76', name: 'OLYMPUS Taro', price: 110 },
-    { id: '77', name: 'Mandarin Tea', price: 95 },
-    { id: '78', name: 'Lemon Tea', price: 85 },
-    { id: '79', name: 'Peachy Green Tea', price: 95 },
-    { id: '80', name: 'Lychee Tea', price: 95 }
+    { id: '71', name: 'Sassy Cactus', price: 85, imageName: 'sassy_cactus.jpg', rating: 4.5 },
+    { id: '72', name: 'Grape Tea', price: 90, imageName: 'grape_tea.jpg', rating: 4.6 },
+    { id: '73', name: 'Nose tea signature', price: 95, imageName: 'nose_tea_signature.jpg', rating: 4.6 },
+    { id: '74', name: 'Chocolate Signature', price: 105, imageName: 'chocolate_signature.jpg', rating: 4.4 },
+    { id: '75', name: 'Thai Tea Signature', price: 90, imageName: 'thai_tea_signature.jpg', rating: 4.5 },
+    { id: '76', name: 'OLYMPUS Taro', price: 110, imageName: 'olympus_taro.jpg', rating: 4.7 },
+    { id: '77', name: 'Mandarin Tea', price: 95, imageName: 'mandarin_tea.jpg', rating: 4.5 },
+    { id: '78', name: 'Lemon Tea', price: 85, imageName: 'lemon_tea.jpg', rating: 4.4 },
+    { id: '79', name: 'Peachy Green Tea', price: 95, imageName: 'peachy_green_tea.jpg', rating: 4.5 },
+    { id: '80', name: 'Lychee Tea', price: 95, imageName: 'lychee_tea.jpg', rating: 4.6 }
   ],
 
   'Boost Juice': [
-    { id: '81', name: 'Mini Me Mango', price: 125 },
-    { id: '82', name: 'Immunity Juice', price: 135 },
-    { id: '83', name: 'Vita C Detox Juice', price: 135 },
-    { id: '84', name: 'Blueberry Blast', price: 140 },
-    { id: '85', name: 'King William Chocolate', price: 145 },
-    { id: '86', name: 'Raspberry Mango Crush', price: 135 },
-    { id: '87', name: 'Strawberry Protein', price: 150 },
-    { id: '88', name: 'Cookie and Cream', price: 145 },
-    { id: '89', name: 'Banana Buzz', price: 130 },
-    { id: '90', name: 'Superfruit Energy', price: 150 }
+    { id: '81', name: 'Mini Me Mango', price: 125, imageName: 'mini_me_mango.jpg', rating: 4.5 },
+    { id: '82', name: 'Immunity Juice', price: 135, imageName: 'immunity_juice.jpg', rating: 4.6 },
+    { id: '83', name: 'Vita C Detox Juice', price: 135, imageName: 'vita_c_detox_juice.jpg', rating: 4.5 },
+    { id: '84', name: 'Blueberry Blast', price: 140, imageName: 'blueberry_blast.jpg', rating: 4.4 },
+    { id: '85', name: 'King William Chocolate', price: 145, imageName: 'king_william_chocolate.jpg', rating: 4.7 },
+    { id: '86', name: 'Raspberry Mango Crush', price: 135, imageName: 'raspberry_mango_crush.jpg', rating: 4.5 },
+    { id: '87', name: 'Strawberry Protein', price: 150, imageName: 'strawberry_protein.jpg', rating: 4.6 },
+    { id: '88', name: 'Cookie and Cream', price: 145, imageName: 'cookie_and_cream.jpg', rating: 4.4 },
+    { id: '89', name: 'Banana Buzz', price: 130, imageName: 'banana_buzz.jpg', rating: 4.5 },
+    { id: '90', name: 'Superfruit Energy', price: 150, imageName: 'superfruit_energy.jpg', rating: 4.7 }
   ],
 
   'Yole Thailand': [
-    { id: '91', name: 'Peanut Butter', price: 155 },
-    { id: '92', name: 'SIGNATURE CUPS', price: 165 },
-    { id: '93', name: 'IBIZA', price: 170 },
-    { id: '94', name: 'WAFFLE BOWL', price: 180 },
-    { id: '95', name: 'CONES', price: 110 },
-    { id: '96', name: 'BUBBLE WAFFLE', price: 190 },
-    { id: '97', name: 'YOLE BOX', price: 170 },
-    { id: '98', name: 'SHAKES', price: 160 },
-    { id: '99', name: 'TWIST', price: 135 },
-    { id: '100', name: 'Pistachio', price: 175 }
+    { id: '91', name: 'Peanut Butter', price: 155, imageName: 'peanut_butter.jpg', rating: 4.5 },
+    { id: '92', name: 'SIGNATURE CUPS', price: 165, imageName: 'signature_cups.jpg', rating: 4.6 },
+    { id: '93', name: 'IBIZA', price: 170, imageName: 'ibiza.jpg', rating: 4.5 },
+    { id: '94', name: 'WAFFLE BOWL', price: 180, imageName: 'waffle_bowl.jpg', rating: 4.6 },
+    { id: '95', name: 'CONES', price: 110, imageName: 'cones.jpg', rating: 4.4 },
+    { id: '96', name: 'BUBBLE WAFFLE', price: 190, imageName: 'bubble_waffle.jpg', rating: 4.7 },
+    { id: '97', name: 'YOLE BOX', price: 170, imageName: 'yole_box.jpg', rating: 4.5 },
+    { id: '98', name: 'SHAKES', price: 160, imageName: 'shakes.jpg', rating: 4.6 },
+    { id: '99', name: 'TWIST', price: 135, imageName: 'twist.jpg', rating: 4.5 },
+    { id: '100', name: 'Pistachio', price: 175, imageName: 'pistachio.jpg', rating: 4.7 }
   ],
 
   'Azabusabo Thailand': [
-    { id: '101', name: 'Yuzu', price: 120 },
-    { id: '102', name: 'Chocolate', price: 120 },
-    { id: '103', name: 'Vanilla', price: 115 },
-    { id: '104', name: 'Matcha', price: 125 },
-    { id: '105', name: 'Mix flavor(yuzu&choco)', price: 130 },
-    { id: '106', name: 'Mix flavor(vanilla&matcha)', price: 135 },
-    { id: '107', name: 'Monaka Ice cream', price: 140 },
-    { id: '108', name: 'Single Cup', price: 95 },
-    { id: '109', name: 'Double Cup', price: 150 },
-    { id: '110', name: 'Double Cone', price: 155 }
+    { id: '101', name: 'Yuzu', price: 120, imageName: 'yuzu.jpg', rating: 4.5 },
+    { id: '102', name: 'Chocolate', price: 120, imageName: 'chocolate.jpg', rating: 4.6 },
+    { id: '103', name: 'Vanilla', price: 115, imageName: 'vanilla.jpg', rating: 4.5 },
+    { id: '104', name: 'Matcha', price: 125, imageName: 'matcha.jpg', rating: 4.5 },
+    { id: '105', name: 'Mix flavor(yuzu&choco)', price: 130, imageName: 'mix_flavor_yuzu_choco.jpg', rating: 4.4 },
+    { id: '106', name: 'Mix flavor(vanilla& matcha)', price: 135, imageName: 'mix_flavor_vanilla_matcha.jpg', rating: 4.6 },
+    { id: '107', name: 'Monaka Ice cream', price: 140, imageName: 'monaka_ice_cream.jpg', rating: 4.6 },
+    { id: '108', name: 'Single Cup', price: 95, imageName: 'single_cup.jpg', rating: 4.4 },
+    { id: '109', name: 'Double Cup', price: 150, imageName: 'double_cup.jpg', rating: 4.5 },
+    { id: '110', name: 'Double Cone', price: 155, imageName: 'double_cone.jpg', rating: 4.5 }
   ]
 };
+
 
 
 export default function MenuScreen({ navigation, route }) {
