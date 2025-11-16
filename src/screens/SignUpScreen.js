@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, ActivityIndicator } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, ActivityIndicator, ImageBackground } from 'react-native';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { auth } from '../config/firebaseConfig';
 
@@ -64,10 +64,15 @@ export default function SignUpScreen({ navigation }) {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>SIGN UP</Text>
-      
-      <View style={styles.formContainer}>
+    <ImageBackground 
+      source={require('../../assets/Logo.jpg')} 
+      style={styles.container}
+      imageStyle={styles.backgroundImage}
+    >
+      <View style={styles.overlay}>
+        <Text style={styles.title}>SIGN UP</Text>
+        
+        <View style={styles.formContainer}>
         <Text style={styles.label}>User name :</Text>
         <TextInput
           style={styles.input}
@@ -122,13 +127,20 @@ export default function SignUpScreen({ navigation }) {
         </TouchableOpacity>
       </View>
     </View>
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#E1D5E7',
+  },
+  backgroundImage: {
+    opacity: 0.5,
+  },
+  overlay: {
+    flex: 1,
+    backgroundColor: 'rgba(225, 213, 231, 0.3)',
     padding: 20,
     justifyContent: 'center',
   },

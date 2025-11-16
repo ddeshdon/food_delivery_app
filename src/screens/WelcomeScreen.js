@@ -6,10 +6,10 @@ export default function WelcomeScreen({ navigation }) {
     <View style={styles.container}>
       <View style={styles.logoContainer}>
         <View style={styles.logoCircle}>
-          <Text style={styles.logoText}>🏍️</Text>
-          <Text style={styles.brandText}>MA</Text>
-          <Text style={styles.subText}>FOOD</Text>
-          <Text style={styles.subText}>DELIVERY</Text>
+          <Image 
+            source={require('../../assets/Logo.jpg')} 
+            style={styles.logoImage}
+          />
         </View>
       </View>
       
@@ -44,6 +44,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 50,
+    overflow: 'hidden',
+  },
+  logoImage: {
+    width: 200,
+    height: 200,
+    borderRadius: 100,
   },
   logoText: {
     fontSize: 40,
