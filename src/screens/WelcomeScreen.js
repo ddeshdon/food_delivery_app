@@ -11,6 +11,7 @@ export default function WelcomeScreen({ navigation }) {
             style={styles.logoImage}
           />
         </View>
+        <Text style={styles.sloganText}>Good food, delivered with heart</Text>
       </View>
       
       <TouchableOpacity 
@@ -64,6 +65,14 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: '#2C5F5D',
     fontWeight: '600',
+  },
+  sloganText: {
+    fontSize: 24,
+    color: '#2C5F5D',
+    fontWeight: '500',
+    fontStyle: 'italic',
+    marginTop: 5,
+    textAlign: 'center',
   },
   getStartedButton: {
     backgroundColor: '#4A90E2',
